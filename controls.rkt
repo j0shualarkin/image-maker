@@ -2,7 +2,6 @@
 
 (require 2htdp/universe 2htdp/image)
 
-
 #|
 
 Params : [List Any]
@@ -16,23 +15,20 @@ Object : {Nat x Nat x [Params -> Object]
 (struct Object [x y shape size color fill] #:transparent)
 
 
-(define Obj1 (Object 50 50 circle 30 "red" "solid"))
-(define Obj2 (Object 50 60 circle 20 "brown" "outline" ))
-(define Obj3 (Object 2 50 square 70 "black" "solid"))
-(define Obj4 (Object 50 120 circle 20 "lemonchiffon" "outline"))
-(define Obj5 (Object 130 50 triangle 30 "green" "solid"))
+(define Obj1 (Object 150 50 circle 10 "red" "solid"))
+(define Obj2 (Object 150 160 circle 10 "brown" "outline" ))
+(define Obj3 (Object 102 150 square 10 "black" "solid"))
+(define Obj4 (Object 50 120 circle 10 "lemonchiffon" "outline"))
+(define Obj5 (Object 70 50 triangle 10 "green" "solid"))
 
 #|
 Field : [List Obj]
 all-layers : [List Field]
-
-
 |#
 
 
-
-(define init-layers `((,Obj1 ,Obj2 ,Obj3 ,Obj4 ,Obj5)))
 (struct World [field all-layers clock] #:transparent)
+(define init-layers `((,Obj1 ,Obj2 ,Obj3 ,Obj4 ,Obj5)))
 (define init-world (World (car init-layers) init-layers 0))
 
 
@@ -46,16 +42,16 @@ all-layers : [List Field]
 
 (define (draw-field f)
   (match f
-    ['() empty-image]
+    ['() (empty-scene 200 200)]
     [`(,o . ,d)
      (place-image
-      (draw-object o) (Object-x o) (Object-y o) (draw-field d))]))
+      (draw-object o)
+      (Object-x o)
+      (Object-y o)
+      (draw-field d))]))
 
 (define (draw-world w)
-  (match w
-    [(World field all clock)
-     (overlay (draw-field field)
-              (empty-scene 500 500))]))
+  (draw-field (World-field w)))
 
 (define (key-handler w i)
   (match i
