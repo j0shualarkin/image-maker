@@ -13,6 +13,11 @@ Object : {Nat x Nat x [Params -> Object]
          x Params}
 |#
 
+;; Color :: Racket Color
+;; Fill :: Racket Mode 
+;; ImageFunction :: [Nat Color Fill -> Image]
+
+;; Object ::(Object Nat Nat ImageFunction Nat Color Fill)
 (struct Object [x y shape size color fill] #:transparent)
 
 
@@ -21,6 +26,18 @@ Object : {Nat x Nat x [Params -> Object]
 (define Obj3 (Object 2 50 square 70 "black" "solid"))
 (define Obj4 (Object 50 120 circle 20 "lemonchiffon" "outline"))
 (define Obj5 (Object 130 50 triangle 30 "green" "solid"))
+
+
+;; define an object that is a star
+;; and a line 
+;; special features for when it's a line
+;; -- how many, rotation,
+;; penrose as a function on the arguments 
+
+;; so the object is plane ?
+
+;; 
+
 
 #|
 Field : [List Obj]
